@@ -1,8 +1,6 @@
 import { ethers } from 'hardhat';
 import * as dotenv from 'dotenv';
-import { deployContract } from '../utils/lib';
-import { getBalance } from '../utils/lib';
-import { MyToken } from '../typechain';
+import { deployContract, getBalance } from '../utils/lib';
 import "@nomiclabs/hardhat-ethers"
 dotenv.config();
 
@@ -15,7 +13,7 @@ async function deployToken(tokenName: string, tokenSymbol: string, tokenSupply: 
 
   const Token = await ethers.getContractFactory("MyToken");
   const token = await deployContract(Token, tokenName, tokenSymbol, tokenSupply, deployer.address)
-  console.log(`Token deployed to: ${await token.address}`);
+  console.log(`Token deployed to: ${token.address}`);
 
   // Verify current owner
   const currentOwner = await token.owner();
